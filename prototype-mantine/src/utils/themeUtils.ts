@@ -122,18 +122,18 @@ export const formatTraitName = (key: string): string => {
 // Function to get gradient colors for triad traits
 export const getTriadGradient = (type: 'dark' | 'light', value: number): string => {
   if (type === 'dark') {
-    // Red gradient for dark triad (higher = more red)
-    const intensity = Math.min(value / 100, 1);
-    const red = Math.round(220 * intensity + 50 * (1 - intensity));
-    const green = Math.round(50 * (1 - intensity));
-    const blue = Math.round(50 * (1 - intensity));
-    return `rgb(${red}, ${green}, ${blue})`;
+    // Red color for dark triad - intensity based on value
+    if (value <= 20) return '#FCA5A5'; // Light red for low values
+    if (value <= 40) return '#F87171'; // Medium light red
+    if (value <= 60) return '#EF4444'; // Medium red  
+    if (value <= 80) return '#DC2626'; // Strong red
+    return '#B91C1C'; // Dark red for high values
   } else {
-    // Green gradient for light triad (higher = more green)
-    const intensity = Math.min(value / 100, 1);
-    const red = Math.round(50 * (1 - intensity));
-    const green = Math.round(180 * intensity + 50 * (1 - intensity));
-    const blue = Math.round(50 * (1 - intensity));
-    return `rgb(${red}, ${green}, ${blue})`;
+    // Green color for light triad - intensity based on value
+    if (value <= 20) return '#A7F3D0'; // Light green for low values
+    if (value <= 40) return '#6EE7B7'; // Medium light green
+    if (value <= 60) return '#34D399'; // Medium green
+    if (value <= 80) return '#10B981'; // Strong green
+    return '#059669'; // Dark green for high values
   }
 };

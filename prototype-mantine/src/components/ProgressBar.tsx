@@ -41,31 +41,16 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       />
       
       {/* Main value bar */}
-      {gradientColor ? (
-        <Box
-          style={{
-            position: 'relative',
-            zIndex: 2,
-            height: '28px',
-            width: '100%',
-            borderRadius: '6px',
-            backgroundColor: '#f0f0f0',
-            background: `linear-gradient(90deg, #f0f0f0 0%, ${gradientColor} ${value}%)`,
-            border: '1px solid #dee2e6'
-          }}
-        />
-      ) : (
-        <Progress
-          value={value}
-          color={color}
-          size="lg"
-          radius="md"
-          style={{
-            position: 'relative',
-            zIndex: 2
-          }}
-        />
-      )}
+      <Progress
+        value={value}
+        color={gradientColor ? gradientColor : color}
+        size="lg"
+        radius="md"
+        style={{
+          position: 'relative',
+          zIndex: 2
+        }}
+      />
       
       {/* Value text overlay */}
       <Text

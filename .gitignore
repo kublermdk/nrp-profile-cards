@@ -5,6 +5,8 @@
 # Node Modules - The main reason for this
 node_modules/
 
+# The main dist created deploy files
+dist/
 # phpstorm project files
 .idea
 
