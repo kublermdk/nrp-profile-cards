@@ -67,10 +67,11 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
               Age {profile.personalInfo.age} • {profile.personalInfo.currentResidence}
             </Text>
             <Group gap="xs">
+              Job{profile.personalInfo.jobTitles && profile.personalInfo.jobTitles.length > 1 ? 's': ''}:
               {profile.personalInfo.jobTitles.slice(0, 2).map((title, index) => (
                 <Badge
                   key={index}
-                  variant="light"
+                  variant="filled"
                   color="white"
                   style={{ color: theme.primary }}
                 >
@@ -161,45 +162,46 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
 
         <Divider color={theme.primary} />
 
-        {/* Dark Triad */}
-        <Box>
-          <Title order={4} mb="md" c={theme.text}>
-            Dark Triad
-          </Title>
-          <Stack gap="sm">
-            {Object.entries(profile.darkTriad).map(([key, trait]) => (
-              <ProgressBar
-                key={key}
-                label={formatTraitName(key)}
-                value={trait.value}
-                confidence={trait.confidence}
-                gradientColor={getTriadGradient('dark', trait.value)}
-                showTooltip={true}
-              />
-            ))}
-          </Stack>
-        </Box>
+        {/* Dark Triad and Light Triad - 2 Column Layout */}
+        <SimpleGrid cols={2} spacing="xl">
+          {/* Dark Triad */}
+          <Box>
+            <Title order={4} mb="md" c={theme.text}>
+              Dark Triad
+            </Title>
+            <Stack gap="sm">
+              {Object.entries(profile.darkTriad).map(([key, trait]) => (
+                <ProgressBar
+                  key={key}
+                  label={formatTraitName(key)}
+                  value={trait.value}
+                  confidence={trait.confidence}
+                  gradientColor={getTriadGradient('dark', trait.value)}
+                  showTooltip={true}
+                />
+              ))}
+            </Stack>
+          </Box>
 
-        <Divider color={theme.primary} />
-
-        {/* Light Triad */}
-        <Box>
-          <Title order={4} mb="md" c={theme.text}>
-            Light Triad
-          </Title>
-          <Stack gap="sm">
-            {Object.entries(profile.lightTriad).map(([key, trait]) => (
-              <ProgressBar
-                key={key}
-                label={formatTraitName(key)}
-                value={trait.value}
-                confidence={trait.confidence}
-                gradientColor={getTriadGradient('light', trait.value)}
-                showTooltip={true}
-              />
-            ))}
-          </Stack>
-        </Box>
+          {/* Light Triad */}
+          <Box>
+            <Title order={4} mb="md" c={theme.text}>
+              Light Triad
+            </Title>
+            <Stack gap="sm">
+              {Object.entries(profile.lightTriad).map(([key, trait]) => (
+                <ProgressBar
+                  key={key}
+                  label={formatTraitName(key)}
+                  value={trait.value}
+                  confidence={trait.confidence}
+                  gradientColor={getTriadGradient('light', trait.value)}
+                  showTooltip={true}
+                />
+              ))}
+            </Stack>
+          </Box>
+        </SimpleGrid>
 
         <Divider color={theme.primary} />
 
