@@ -1,0 +1,37 @@
+## -------------------------------------------------
+##   Git IGNORE
+## -------------------------------------------------
+
+# Node Modules - The main reason for this
+node_modules/
+
+# phpstorm project files
+.idea
+
+# Vagrant file
+Vagrantfile
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
+
+
+# vagrant folder
+/.vagrant
+
+
+npm-debug.*
+
+# vscode files
+.vscode/
+temp/
