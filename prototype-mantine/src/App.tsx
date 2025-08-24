@@ -8,6 +8,7 @@ function App() {
   const [selectedPerson, setSelectedPerson] = useState<string>(Object.keys(profilesData)[0]);
   const selectedProfile = profilesData[selectedPerson];
 
+
   return (
     <MantineProvider>
       <Box style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>

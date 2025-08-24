@@ -48,7 +48,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           <Avatar
             size="xl"
             radius="md"
-            src={null} // Profile pictures would go here
+            src={profile.personalInfo.profilePicture && profile.personalInfo.profilePicture.includes('/') ? profile.personalInfo.profilePicture : null} // Profile pictures would go here
             style={{
               backgroundColor: theme.secondary,
               color: theme.text,
@@ -58,7 +58,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
           >
             {profile.personalInfo.name.split(' ').map(n => n[0]).join('')}
           </Avatar>
-          
+
           <Stack gap="xs" style={{ flex: 1 }}>
             <Title order={2} c="white">
               {profile.personalInfo.name}
