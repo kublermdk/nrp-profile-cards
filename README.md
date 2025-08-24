@@ -6,6 +6,8 @@ Please see https://www.nonreductionism.org/ for more information about Non-Reduc
 
 Contact **David Long** for more info about the movement and **Michael Kubler** ( [@kublermdk](https://www.kublermdk.com/) ) about this profile card project
 
+This project is available on Github at https://github.com/kublermdk/nrp-profile-cards
+
 ## Features
 
 - 🎨 **Dynamic Color Theming** - Card themes change based on developmental stages (Red, Orange, Blue, Green, Yellow, etc.)
@@ -63,6 +65,10 @@ The application includes 8 example profiles:
 ```bash
 npm run build
 ```
+
+Once built Michael Kubler can upload the files to his Starlord server and host it in https://nrp.greyphoenix.biz/
+at least until we move it to a better location.
+
 
 ## Project Structure
 
