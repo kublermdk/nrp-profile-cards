@@ -67,15 +67,14 @@ export const profilesData: Record<string, ProfileData> = {
     "David Long": {
         "personalInfo": {
             "name": "David Long",
-            "age": 45,
+            "age": 42,
             "profilePicture": "profile-pictures/david_long_profile.webp",
             "countryOfOrigin": "United States",
             "currentResidence": "United States",
             "jobTitles": [
                 "NRP Founder",
+                "Consultant",
                 "Video Production",
-                "Analyst",
-                "Consultant"
             ],
             "generatedAt": "2025-08-24T19:43:00.000Z"
         },
@@ -84,11 +83,11 @@ export const profilesData: Record<string, ProfileData> = {
             "confidence": 99
         },
         "mbti": {
-            "type": "INTJ",
+            "type": "ENTJ",
             "confidence": 70
         },
         "enneagram": {
-            "type": "1",
+            "type": "8",
             "wing": "w9",
             "confidence": 70
         },
@@ -128,15 +127,15 @@ export const profilesData: Record<string, ProfileData> = {
                 "confidence": 70
             },
             "musical": {
-                "value": 50,
-                "confidence": 60
+                "value": 85,
+                "confidence": 80
             },
             "bodilyKinesthetic": {
                 "value": 55,
                 "confidence": 65
             },
             "interpersonal": {
-                "value": 65,
+                "value": 75,
                 "confidence": 70
             },
             "intrapersonal": {
@@ -150,29 +149,29 @@ export const profilesData: Record<string, ProfileData> = {
         },
         "darkTriad": {
             "narcissism": {
-                "value": 25,
+                "value": 10,
                 "confidence": 70
             },
             "machiavellianism": {
-                "value": 30,
+                "value": 5,
                 "confidence": 70
             },
             "psychopathy": {
-                "value": 10,
+                "value": 0,
                 "confidence": 80
             }
         },
         "lightTriad": {
             "humanism": {
-                "value": 75,
+                "value": 95,
                 "confidence": 75
             },
             "kantianism": {
-                "value": 80,
+                "value": 95,
                 "confidence": 75
             },
             "faithInHumanity": {
-                "value": 70,
+                "value": 95,
                 "confidence": 70
             }
         },
@@ -213,8 +212,8 @@ export const profilesData: Record<string, ProfileData> = {
             "generatedAt": "2025-08-24T19:43:00.000Z"
         },
         "stage": {
-            "primary": "Yellow/Turquoise",
-            "confidence": 85
+            "primary": "Orange",
+            "confidence": 50
         },
         "mbti": {
             "type": "ENTP",
