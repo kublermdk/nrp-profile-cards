@@ -88,7 +88,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   }
 
   return (
-    <Tooltip.Provider>
+    <Tooltip.Provider delayDuration={0}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
           <div className="mb-3 cursor-help">

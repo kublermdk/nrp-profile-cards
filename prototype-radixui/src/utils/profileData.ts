@@ -2,6 +2,8 @@ export interface ProfileData {
     personalInfo: {
         name: string;
         age: number;
+        dateOfBirth: string; // -- YYYY-MM-DD format, can be partial (YYYY or YYYY-MM)
+        deceased: boolean;
         profilePicture: string;
         countryOfOrigin: string;
         currentResidence: string;
@@ -73,6 +75,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "David Long",
             "age": 42,
+            "dateOfBirth": "1982-03-15",
+            "deceased": false,
             "profilePicture": "profile-pictures/david_long_profile.webp",
             "countryOfOrigin": "United States",
             "currentResidence": "UAE",
@@ -218,6 +222,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Leonardo da Vinci",
             "age": 67,
+            "dateOfBirth": "1452-04-15",
+            "deceased": true,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Francesco_Melzi_-_Portrait_of_Leonardo.png/500px-Francesco_Melzi_-_Portrait_of_Leonardo.png",
             "countryOfOrigin": "Italy",
             "currentResidence": "France",
@@ -373,6 +379,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Peter Joseph",
             "age": 45,
+            "dateOfBirth": "1979-06",
+            "deceased": false,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Peter_Joseph.jpg/500px-Peter_Joseph.jpg",
             "countryOfOrigin": "United States",
             "currentResidence": "United States",
@@ -508,6 +516,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Barack Obama",
             "age": 62,
+            "dateOfBirth": "1961-08-04",
+            "deceased": false,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Barack_H._Obama_close-up_%28cropped%29.png/960px-Barack_H._Obama_close-up_%28cropped%29.png",
             "countryOfOrigin": "United States",
             "currentResidence": "United States",
@@ -642,6 +652,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Hank Green",
             "age": 44,
+            "dateOfBirth": "1980",
+            "deceased": false,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Hank_Green_in_His_2023_Office_Tour.jpg/500px-Hank_Green_in_His_2023_Office_Tour.jpg",
             "countryOfOrigin": "United States",
             "currentResidence": "United States",
@@ -792,6 +804,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Elon Musk",
             "age": 53,
+            "dateOfBirth": "1971-06-28",
+            "deceased": false,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Elon_Musk%2C_2018_%28cropped%29.jpg/500px-Elon_Musk%2C_2018_%28cropped%29.jpg",
             "countryOfOrigin": "South Africa",
             "currentResidence": "United States",
@@ -927,6 +941,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Jeff Bezos",
             "age": 60,
+            "dateOfBirth": "1964-01-12",
+            "deceased": false,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Jeff_Bezos%27_iconic_laugh_crop.jpg/500px-Jeff_Bezos%27_iconic_laugh_crop.jpg",
             "countryOfOrigin": "United States",
             "currentResidence": "United States",
@@ -1062,6 +1078,8 @@ export const profilesData: Record<string, ProfileData> = {
         "personalInfo": {
             "name": "Donald J. Trump",
             "age": 78,
+            "dateOfBirth": "1946-06-14",
+            "deceased": false,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Donald_Trump_closeup.jpg/960px-Donald_Trump_closeup.jpg",
             "countryOfOrigin": "United States",
             "currentResidence": "United States",

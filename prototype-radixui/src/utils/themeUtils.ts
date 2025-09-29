@@ -138,4 +138,37 @@ export const getTriadGradient = (type: 'dark' | 'light', value: number): string 
   }
 };
 
+// -- Function to calculate age from date of birth
+export const calculateAge = (dateOfBirth: string, deceased: boolean = false, profileAge?: number): { age: number; displayText: string } => {
+  // -- For deceased individuals, use the age field directly
+  if (deceased && profileAge !== undefined) {
+    return { age: profileAge, displayText: `Died at ${profileAge}` };
+  }
+  
+  // -- For living individuals, calculate age from date of birth
+  const now = new Date();
+  
+  // -- Parse the date of birth (supports YYYY, YYYY-MM, YYYY-MM-DD)
+  const parts = dateOfBirth.split('-');
+  const birthYear = parseInt(parts[0], 10);
+  const birthMonth = parts[1] ? parseInt(parts[1], 10) : 1; // -- Default to January if month not specified
+  const birthDay = parts[2] ? parseInt(parts[2], 10) : 1; // -- Default to 1st if day not specified
+  
+  // -- Create date objects for comparison
+  const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+  
+  // -- Calculate age
+  let age = now.getFullYear() - birthYear;
+  const monthDiff = now.getMonth() - birthDate.getMonth();
+  
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  
+  // -- Create display text - simplified to just show age
+  const displayText = `Age ${age}`;
+  
+  return { age, displayText };
+};
+
 

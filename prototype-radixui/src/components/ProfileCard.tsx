@@ -3,7 +3,7 @@ import * as Avatar from '@radix-ui/react-avatar';
 import * as Separator from '@radix-ui/react-separator';
 import ReactMarkdown from 'react-markdown';
 import { ProfileData } from '../utils/profileData';
-import { getStageTheme, formatTraitName, getTriadGradient } from '../utils/themeUtils';
+import { getStageTheme, formatTraitName, getTriadGradient, calculateAge } from '../utils/themeUtils';
 import { ProgressBar } from './ProgressBar';
 import { JsonEditor } from './JsonEditor';
 
@@ -59,6 +59,7 @@ const WebsiteIcon: React.FC<{ label?: string }> = ({ label }) => {
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, onProfileUpdate }) => {
   const theme = getStageTheme(profile.stage.primary);
+  const ageInfo = calculateAge(profile.personalInfo.dateOfBirth, profile.personalInfo.deceased, profile.personalInfo.age);
 
   return (
     <div 
@@ -124,7 +125,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, 
               {profile.personalInfo.name}
             </h2>
             <p className="text-lg text-white/90 mb-2">
-              Age {profile.personalInfo.age} • {profile.personalInfo.currentResidence}
+              {ageInfo.displayText} • {profile.personalInfo.currentResidence}
             </p>
             <div className="flex gap-2 flex-wrap">
               <span className="text-sm text-white/80">
@@ -255,9 +256,230 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, 
               </h3>
               <div 
                 className="prose prose-sm max-w-none"
-                style={{ color: theme.text }}
+                style={{ 
+                  color: theme.text,
+                  '--tw-prose-body': theme.text,
+                  '--tw-prose-headings': theme.primary,
+                  '--tw-prose-links': theme.primary,
+                  '--tw-prose-bold': theme.text,
+                  '--tw-prose-code': theme.accent,
+                  '--tw-prose-pre-bg': theme.secondary,
+                  '--tw-prose-pre-code': theme.text,
+                  '--tw-prose-quotes': theme.text,
+                  '--tw-prose-quote-borders': theme.primary,
+                  '--tw-prose-hr': theme.primary + '40',
+                  '--tw-prose-th-borders': theme.primary + '40',
+                  '--tw-prose-td-borders': theme.primary + '20'
+                } as React.CSSProperties}
               >
-                <ReactMarkdown>{profile.personalInfo.biography}</ReactMarkdown>
+                <ReactMarkdown
+                  components={{
+                    // -- Custom styling for links
+                    a: ({ href, children, ...props }) => (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium underline decoration-2 underline-offset-2 hover:decoration-4 transition-all duration-200"
+                        style={{ 
+                          color: theme.primary,
+                          textDecorationColor: theme.primary + '60'
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </a>
+                    ),
+                    // -- Custom styling for headings
+                    h1: ({ children, ...props }) => (
+                      <h1 
+                        className="text-2xl font-bold mt-6 mb-4 first:mt-0"
+                        style={{ color: theme.primary }}
+                        {...props}
+                      >
+                        {children}
+                      </h1>
+                    ),
+                    h2: ({ children, ...props }) => (
+                      <h2 
+                        className="text-xl font-semibold mt-5 mb-3 first:mt-0"
+                        style={{ color: theme.primary }}
+                        {...props}
+                      >
+                        {children}
+                      </h2>
+                    ),
+                    h3: ({ children, ...props }) => (
+                      <h3 
+                        className="text-lg font-semibold mt-4 mb-2 first:mt-0"
+                        style={{ color: theme.primary }}
+                        {...props}
+                      >
+                        {children}
+                      </h3>
+                    ),
+                    // -- Custom styling for bold and italic
+                    strong: ({ children, ...props }) => (
+                      <strong 
+                        className="font-bold"
+                        style={{ color: theme.text }}
+                        {...props}
+                      >
+                        {children}
+                      </strong>
+                    ),
+                    em: ({ children, ...props }) => (
+                      <em 
+                        className="italic"
+                        style={{ color: theme.text }}
+                        {...props}
+                      >
+                        {children}
+                      </em>
+                    ),
+                    // -- Custom styling for code
+                    code: ({ children, ...props }) => (
+                      <code 
+                        className="px-1.5 py-0.5 rounded text-sm font-mono"
+                        style={{ 
+                          backgroundColor: theme.secondary,
+                          color: theme.accent,
+                          border: `1px solid ${theme.primary}20`
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </code>
+                    ),
+                    pre: ({ children, ...props }) => (
+                      <pre 
+                        className="p-4 rounded-lg overflow-x-auto"
+                        style={{ 
+                          backgroundColor: theme.secondary,
+                          border: `1px solid ${theme.primary}20`
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </pre>
+                    ),
+                    // -- Custom styling for blockquotes
+                    blockquote: ({ children, ...props }) => (
+                      <blockquote 
+                        className="border-l-4 pl-4 my-4 italic"
+                        style={{ 
+                          borderLeftColor: theme.primary,
+                          color: theme.text + 'CC'
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </blockquote>
+                    ),
+                    // -- Custom styling for lists
+                    ul: ({ children, ...props }) => (
+                      <ul 
+                        className="list-disc list-inside space-y-1 my-4"
+                        style={{ color: theme.text }}
+                        {...props}
+                      >
+                        {children}
+                      </ul>
+                    ),
+                    ol: ({ children, ...props }) => (
+                      <ol 
+                        className="list-decimal list-inside space-y-1 my-4"
+                        style={{ color: theme.text }}
+                        {...props}
+                      >
+                        {children}
+                      </ol>
+                    ),
+                    li: ({ children, ...props }) => (
+                      <li 
+                        className="ml-2"
+                        style={{ color: theme.text }}
+                        {...props}
+                      >
+                        {children}
+                      </li>
+                    ),
+                    // -- Custom styling for paragraphs
+                    p: ({ children, ...props }) => (
+                      <p 
+                        className="mb-3 last:mb-0 leading-relaxed"
+                        style={{ color: theme.text }}
+                        {...props}
+                      >
+                        {children}
+                      </p>
+                    ),
+                    // -- Custom styling for horizontal rules
+                    hr: ({ ...props }) => (
+                      <hr 
+                        className="my-6"
+                        style={{ 
+                          borderColor: theme.primary + '40',
+                          borderTopWidth: '1px'
+                        }}
+                        {...props}
+                      />
+                    ),
+                    // -- Custom styling for images
+                    img: ({ src, alt, ...props }) => (
+                      <img 
+                        src={src}
+                        alt={alt}
+                        className="rounded-lg shadow-sm max-w-full h-auto my-4"
+                        style={{ 
+                          border: `1px solid ${theme.primary}20`
+                        }}
+                        {...props}
+                      />
+                    ),
+                    // -- Custom styling for tables
+                    table: ({ children, ...props }) => (
+                      <div className="overflow-x-auto my-4">
+                        <table 
+                          className="min-w-full border-collapse"
+                          style={{ 
+                            border: `1px solid ${theme.primary}20`
+                          }}
+                          {...props}
+                        >
+                          {children}
+                        </table>
+                      </div>
+                    ),
+                    th: ({ children, ...props }) => (
+                      <th 
+                        className="px-4 py-2 text-left font-semibold border-b"
+                        style={{ 
+                          backgroundColor: theme.secondary,
+                          color: theme.primary,
+                          borderBottomColor: theme.primary + '40'
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </th>
+                    ),
+                    td: ({ children, ...props }) => (
+                      <td 
+                        className="px-4 py-2 border-b"
+                        style={{ 
+                          color: theme.text,
+                          borderBottomColor: theme.primary + '20'
+                        }}
+                        {...props}
+                      >
+                        {children}
+                      </td>
+                    )
+                  }}
+                >
+                  {profile.personalInfo.biography}
+                </ReactMarkdown>
               </div>
             </div>
           </>
