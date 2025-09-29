@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ProfileCard } from './components/ProfileCard';
 import { PersonSelector } from './components/PersonSelector';
 import { profilesData, ProfileData } from './utils/profileData';
@@ -6,6 +6,34 @@ import { profilesData, ProfileData } from './utils/profileData';
 function App() {
   const [profiles, setProfiles] = useState(profilesData);
   const [selectedPerson, setSelectedPerson] = useState<string>(Object.keys(profilesData)[0]);
+
+  // -- Initialize selected person from URL hash
+  useEffect(() => {
+    const hash = decodeURIComponent(window.location.hash.slice(1)); // -- Remove the # symbol and decode URL encoding
+    if (hash && profilesData[hash]) {
+      setSelectedPerson(hash);
+    }
+  }, []);
+
+  // -- Update URL hash when person is selected
+  const handlePersonSelect = (person: string) => {
+    setSelectedPerson(person);
+    window.location.hash = person;
+  };
+
+  // -- Listen for hash changes (back/forward buttons)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = decodeURIComponent(window.location.hash.slice(1));
+      if (hash && profilesData[hash]) {
+        setSelectedPerson(hash);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const selectedProfile = profiles[selectedPerson];
 
   // -- Handle profile updates from JSON editor
@@ -29,7 +57,7 @@ function App() {
             <PersonSelector
               profiles={profiles}
               selectedPerson={selectedPerson}
-              onPersonSelect={setSelectedPerson}
+              onPersonSelect={handlePersonSelect}
             />
           </div>
           
