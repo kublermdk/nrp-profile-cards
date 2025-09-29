@@ -91,6 +91,13 @@ export const stageThemes = {
     accent: '#0E7490',
     background: '#ECFEFF',
     text: '#164E63'
+  },
+  'Red/Blue': {
+    primary: '#B91C1C',
+    secondary: '#FEF2F2',
+    accent: '#A16207',
+    background: '#FFFBEB',
+    text: '#92400E'
   }
 };
 
@@ -143,6 +150,11 @@ export const calculateAge = (dateOfBirth: string, deceased: boolean = false, pro
   // -- For deceased individuals, use the age field directly
   if (deceased && profileAge !== undefined) {
     return { age: profileAge, displayText: `Died at ${profileAge}` };
+  }
+  
+  // -- If no date of birth provided, return unknown age
+  if (!dateOfBirth || dateOfBirth.trim() === '') {
+    return { age: 0, displayText: 'Age unknown' };
   }
   
   // -- For living individuals, calculate age from date of birth

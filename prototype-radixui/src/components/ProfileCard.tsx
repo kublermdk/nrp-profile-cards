@@ -59,7 +59,7 @@ const WebsiteIcon: React.FC<{ label?: string }> = ({ label }) => {
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, onProfileUpdate }) => {
   const theme = getStageTheme(profile.stage.primary);
-  const ageInfo = calculateAge(profile.personalInfo.dateOfBirth, profile.personalInfo.deceased, profile.personalInfo.age);
+  const ageInfo = calculateAge(profile.personalInfo.dateOfBirth || '', profile.personalInfo.deceased || false, profile.personalInfo.age);
 
   return (
     <div 
@@ -125,13 +125,13 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, 
               {profile.personalInfo.name}
             </h2>
             <p className="text-lg text-white/90 mb-2">
-              {ageInfo.displayText} • {profile.personalInfo.currentResidence}
+              {ageInfo.displayText}{profile.personalInfo.currentResidence ? ` • ${profile.personalInfo.currentResidence}` : ''}
             </p>
             <div className="flex gap-2 flex-wrap">
               <span className="text-sm text-white/80">
                 Job{profile.personalInfo.jobTitles && profile.personalInfo.jobTitles.length > 1 ? 's': ''}:
               </span>
-              {profile.personalInfo.jobTitles.slice(0, 2).map((title, index) => (
+              {profile.personalInfo.jobTitles?.slice(0, 2).map((title, index) => (
                 <span
                   key={index}
                   className="px-2 py-1 rounded-full text-xs font-medium text-white"
@@ -608,7 +608,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, 
         {/* Footer */}
         <div className="text-center">
           <p className="text-xs text-gray-500">
-            Generated: {new Date(profile.personalInfo.generatedAt).toLocaleDateString()}
+            Generated: {profile.personalInfo.generatedAt ? new Date(profile.personalInfo.generatedAt).toLocaleDateString() : 'Unknown'}
           </p>
         </div>
       </div>
