@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -- CSS Variables for theme colors */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+}
+
+/* -- Custom styles for Radix UI components */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* -- Radix UI Progress component styles */
+[data-radix-progress-root] {
+  position: relative;
+  overflow: hidden;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  width: 100%;
+  height: 1.5rem;
+}
+
+[data-radix-progress-indicator] {
+  width: 100%;
+  height: 100%;
+  transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* -- Radix UI Tooltip styles */
+[data-radix-tooltip-content] {
+  background-color: #1f2937;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  max-width: 20rem;
+  z-index: 50;
+}
+
+[data-radix-tooltip-arrow] {
+  fill: #1f2937;
+}
+
+/* -- Radix UI Separator styles */
+[data-radix-separator-root] {
+  background-color: #e5e7eb;
+  height: 1px;
+  width: 100%;
+}
+
+/* -- Radix UI Avatar styles */
+[data-radix-avatar-root] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  overflow: hidden;
+  user-select: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  background-color: #f3f4f6;
+}
+
+[data-radix-avatar-image] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+[data-radix-avatar-fallback] {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6b7280;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
