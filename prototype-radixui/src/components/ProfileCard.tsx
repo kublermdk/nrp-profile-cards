@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Avatar from '@radix-ui/react-avatar';
 import * as Separator from '@radix-ui/react-separator';
+import ReactMarkdown from 'react-markdown';
 import { ProfileData } from '../utils/profileData';
 import { getStageTheme, formatTraitName, getTriadGradient } from '../utils/themeUtils';
 import { ProgressBar } from './ProgressBar';
@@ -11,6 +12,50 @@ interface ProfileCardProps {
   profileName: string;
   onProfileUpdate: (profileName: string, updatedProfile: ProfileData) => void;
 }
+
+// -- Helper component for website icons
+const WebsiteIcon: React.FC<{ label?: string }> = ({ label }) => {
+  const getIcon = () => {
+    switch (label?.toLowerCase()) {
+      case 'facebook':
+        return (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        );
+      case 'wikipedia':
+        return (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.17 0C5.4 0 0 5.4 0 12.17c0 6.77 5.4 12.17 12.17 12.17s12.17-5.4 12.17-12.17C24.34 5.4 18.94 0 12.17 0zm5.94 18.94c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-5.94 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-5.94 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+          </svg>
+        );
+      case 'youtube':
+        return (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        );
+      case 'perplexity results':
+        return (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        );
+      default:
+        return (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.982 2.982 0 0 0 0-4.24 2.982 2.982 0 0 0-4.24 0l-3.53 3.53a2.982 2.982 0 0 0 0 4.24zm2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.42l-.47.48a2.982 2.982 0 0 0 0 4.24 2.982 2.982 0 0 0 4.24 0l3.53-3.53a2.982 2.982 0 0 0 0-4.24z"/>
+          </svg>
+        );
+    }
+  };
+
+  return (
+    <span className="inline-flex items-center justify-center w-4 h-4">
+      {getIcon()}
+    </span>
+  );
+};
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, onProfileUpdate }) => {
   const theme = getStageTheme(profile.stage.primary);
@@ -161,6 +206,62 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profile, profileName, 
             </div>
           </div>
         </div>
+
+        {/* Websites Section */}
+        {profile.personalInfo.websites && profile.personalInfo.websites.length > 0 && (
+          <>
+            <Separator.Root className="h-px bg-gray-200" />
+            <div>
+              <h3 
+                className="text-xl font-semibold mb-4"
+                style={{ color: theme.text }}
+              >
+                Links
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {profile.personalInfo.websites.map((website, index) => (
+                  <a
+                    key={index}
+                    href={website.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 p-3 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors duration-200 hover:shadow-sm"
+                    style={{
+                      backgroundColor: theme.secondary,
+                      borderColor: theme.primary + '20'
+                    }}
+                  >
+                    <WebsiteIcon label={website.label} />
+                    <span className="text-sm font-medium truncate" style={{ color: theme.text }}>
+                      {website.label || 'Link'}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Biography Section */}
+        {profile.personalInfo.biography && (
+          <>
+            <Separator.Root className="h-px bg-gray-200" />
+            <div>
+              <h3 
+                className="text-xl font-semibold mb-4"
+                style={{ color: theme.text }}
+              >
+                Biography
+              </h3>
+              <div 
+                className="prose prose-sm max-w-none"
+                style={{ color: theme.text }}
+              >
+                <ReactMarkdown>{profile.personalInfo.biography}</ReactMarkdown>
+              </div>
+            </div>
+          </>
+        )}
 
         <Separator.Root className="h-px bg-gray-200" />
 

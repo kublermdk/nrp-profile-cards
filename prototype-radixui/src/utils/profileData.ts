@@ -7,6 +7,11 @@ export interface ProfileData {
         currentResidence: string;
         jobTitles: string[];
         generatedAt: string;
+        websites?: Array<{
+            url: string;
+            label?: string;
+        }>;
+        biography?: string;
     };
     stage: {
         primary: string;
@@ -70,13 +75,28 @@ export const profilesData: Record<string, ProfileData> = {
             "age": 42,
             "profilePicture": "profile-pictures/david_long_profile.webp",
             "countryOfOrigin": "United States",
-            "currentResidence": "United States",
+            "currentResidence": "UAE",
             "jobTitles": [
                 "NRP Founder",
                 "Consultant",
-                "Video Production",
+                "Video Production"
             ],
-            "generatedAt": "2025-08-24T19:43:00.000Z"
+            "generatedAt": "2025-08-24T19:43:00.000Z",
+            "websites": [
+                {
+                    "url": "https://www.perplexity.ai/search/please-analyse-david-long-the-_4VBQwKmRrKkAkg8F.O1RQ",
+                    "label": "Perplexity Results"
+                },
+                {
+                    "url": "https://www.nonreductionism.org/",
+                    "label": "NRP Website"
+                },
+                {
+                    "url": "https://www.youtube.com/@nonreductionism",
+                    "label": "Youtube Channel"
+                }
+            ],
+            "biography": "**David Long** is the founder of the [**Non-Reductionist Philosophy**](https://www.nonreductionism.org/) (NRP) movement, dedicated to exploring holistic approaches to understanding human consciousness and development.\n\nAs a consultant and video production specialist, he combines technical expertise with philosophical insight to create meaningful content that bridges the gap between traditional psychology and emerging paradigms of human potential and is the reason we have these profiles."
         },
         "stage": {
             "primary": "Turquoise",
@@ -127,7 +147,7 @@ export const profilesData: Record<string, ProfileData> = {
                 "confidence": 70
             },
             "musical": {
-                "value": 85,
+                "value": 90,
                 "confidence": 80
             },
             "bodilyKinesthetic": {
@@ -199,7 +219,6 @@ export const profilesData: Record<string, ProfileData> = {
             "name": "Leonardo da Vinci",
             "age": 67,
             "profilePicture": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Francesco_Melzi_-_Portrait_of_Leonardo.png/500px-Francesco_Melzi_-_Portrait_of_Leonardo.png",
-            // "profilePicture": "leonardo_profile.jpg",
             "countryOfOrigin": "Italy",
             "currentResidence": "France",
             "jobTitles": [
@@ -209,7 +228,18 @@ export const profilesData: Record<string, ProfileData> = {
                 "Scientist",
                 "Engineer"
             ],
-            "generatedAt": "2025-08-24T19:43:00.000Z"
+            "generatedAt": "2025-08-24T19:43:00.000Z",
+            "websites": [
+                {
+                    "url": "https://en.wikipedia.org/wiki/Leonardo_da_Vinci",
+                    "label": "Wikipedia"
+                },
+                {
+                    "url": "https://www.perplexity.ai/search/please-analyse-leonardo-da-vin-lr80FknHTAGJy_LRqv8Fxg",
+                    "label": "Perplexity Results"
+                }
+            ],
+            "biography": "**Leonardo da Vinci** was the archetypal **Renaissance man**, whose genius spanned art, science, engineering, and philosophy.\n\nHis insatiable curiosity and innovative thinking made him one of history's most influential figures, creating masterpieces like the [Mona Lisa](https://en.wikipedia.org/wiki/Mona_Lisa) while simultaneously designing flying machines and studying human anatomy. His interdisciplinary approach to knowledge exemplifies the highest levels of cognitive development and creative intelligence."
         },
         "stage": {
             "primary": "Orange",
@@ -403,7 +433,7 @@ export const profilesData: Record<string, ProfileData> = {
                 "confidence": 70
             },
             "musical": {
-                "value": 70,
+                "value": 85,
                 "confidence": 65
             },
             "bodilyKinesthetic": {
@@ -425,16 +455,16 @@ export const profilesData: Record<string, ProfileData> = {
         },
         "darkTriad": {
             "narcissism": {
-                "value": 35,
+                "value": 30,
                 "confidence": 75
             },
             "machiavellianism": {
-                "value": 40,
+                "value": 20,
                 "confidence": 70
             },
             "psychopathy": {
-                "value": 10,
-                "confidence": 80
+                "value": 5,
+                "confidence": 85
             }
         },
         "lightTriad": {
@@ -447,7 +477,7 @@ export const profilesData: Record<string, ProfileData> = {
                 "confidence": 80
             },
             "faithInHumanity": {
-                "value": 80,
+                "value": 75,
                 "confidence": 75
             }
         },
@@ -621,7 +651,22 @@ export const profilesData: Record<string, ProfileData> = {
                 "Author",
                 "Entrepreneur"
             ],
-            "generatedAt": "2025-08-24T19:43:00.000Z"
+            "generatedAt": "2025-08-24T19:43:00.000Z",
+            "websites": [
+                {
+                    "url": "https://www.facebook.com/hankgreen",
+                    "label": "Facebook"
+                },
+                {
+                    "url": "https://en.wikipedia.org/wiki/Hank_Green",
+                    "label": "Wikipedia"
+                },
+                {
+                    "url": "https://www.youtube.com/@hankgreen",
+                    "label": "YouTube"
+                }
+            ],
+            "biography": "Hank Green is a science communicator, entrepreneur, and co-founder of the educational YouTube channels Vlogbrothers and SciShow. Through his engaging content and innovative approach to education, he has made complex scientific concepts accessible to millions of viewers worldwide. His work exemplifies the integration of entertainment and education, demonstrating high levels of interpersonal intelligence and communication skills."
         },
         "stage": {
             "primary": "Green",
